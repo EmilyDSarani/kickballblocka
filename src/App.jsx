@@ -3,6 +3,8 @@ import './App.css';
 import Home from './views/Home/Home'
 import TeamList from './views/Teams/TeamList'
 import PlayerList from './views/Players/PlayerList'
+import PlayerDetail from './views/Players/PlayerDetail'
+import TeamDetail from './views/Teams/TeamDetail';
 
 function App() {
   return (
@@ -22,7 +24,9 @@ function App() {
         <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/teams" exact component={TeamList} />
+        <Route path="/teams/:id" exact component={TeamDetail} />
         <Route path="/players" exact component={PlayerList} />
+        <Route path="/players/:id"  component = {PlayerDetail} />
         </Switch>
       </Router>
     </div>
