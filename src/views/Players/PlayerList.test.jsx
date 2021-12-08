@@ -1,10 +1,15 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router';
 import PlayerList from './PlayerList';
 
 it('should render a player list', async () => {
     
-    const { container } = render(<PlayerList />);
-    expect(container).toMatchSnapshot();
+    render(
+    <MemoryRouter>
+    <PlayerList />
+    </MemoryRouter>);
+
+    const player = await screen.findByText('Bud E. Guy', {exact: false})
+    expect(player).toBeInTheDocument();
 })
 
-//I would like some help going over how to test for a list to be rendering? I am not sure what was really needed to test here. 

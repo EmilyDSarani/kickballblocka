@@ -10,14 +10,3 @@ exports[`should render a player list 1`] = `
   <ul />
 </div>
 `;
-
-exports[`should render a team list 1`] = `
-<div>
-  <div>
-    <h1>
-      Player Page
-    </h1>
-  </div>
-  <ul />
-</div>
-`;
