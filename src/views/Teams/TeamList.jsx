@@ -7,7 +7,7 @@ export default function TeamList() {
     const [teams, setTeams] = useState([]);
 
     useEffect(()=>{
-        getTeams().then((resp)=>setTeams(resp));
+        getTeams().then((sponse)=>setTeams(sponse));
     },[]);
 
     return (
