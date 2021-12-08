@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import PlayerList from './PlayerList';
 
-it('should render a team list', async () => {
+it('should render a player list', async () => {
     
     const { container } = render(<PlayerList />);
     expect(container).toMatchSnapshot();
