@@ -14,6 +14,8 @@ export default function TeamList() {
         <>
         <div>
             <h1>Team Page</h1>
+            <p>New to the Club?</p>
+            <Link to ='/teams/newteam'>Register Your Team </Link>
         </div>
         <ul>
             {teams.map((team)=>{
