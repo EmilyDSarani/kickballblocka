@@ -25,3 +25,7 @@ a:hover{
   color:rgb(117, 2, 2);
   cursor: pointer;
 }
+ /* form{
+   display: flex;
+   flex-direction: column;
+ } */
