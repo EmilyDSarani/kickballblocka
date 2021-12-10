@@ -13,6 +13,7 @@ useEffect(()=>{
     .then((sponse)=> setTeam(sponse))
     .finally(()=> setLoading(false))
 }, [id]);
+
 if(loading) return <h2>Kicker up!</h2>;
 
 
@@ -20,6 +21,7 @@ if(loading) return <h2>Kicker up!</h2>;
         <div>
             <p>
                 <Link to='/teams'>Select different Team</Link>
+                <Link to={`/teams/edit/${team.id}`}>Edit Team</Link>
             </p>
             <h2>{team.name}</h2>
             <p>
@@ -32,7 +34,7 @@ if(loading) return <h2>Kicker up!</h2>;
                             {player.position}-{player.name}
                         </li>
                     );
-                    
+
                 })}
             </ul>
         </div>

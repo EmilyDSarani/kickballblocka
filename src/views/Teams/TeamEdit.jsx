@@ -1,18 +1,42 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router';
-import { deleteTeamById, updateTeamById } from '../../services/teams';
+import { deleteTeamById, updateTeamById, getTeamById } from '../../services/teams';
 
-export default function TeamEdit() {   
+export default function TeamEdit({ match }) {   
 const [name, setName] = useState('');
 const [city, setCity] = useState('');
 const[state,setState] = useState('');
 const history = useHistory();
-
+const { id } = match.params;
+// const [team, setTeam] = useState(null);
 const [loading, setLoading] = useState(true);
+
+
+
+useEffect(()=>{
+    getTeamById(id)
+    .then((sponse)=> { 
+        setName(sponse.name) 
+        setCity(sponse.city)
+        setState(sponse.state)
+    })
+    .finally(()=> setLoading(false))
+}, [id]);
+
+//I do not have to call it into here, since I have access on a global scope
+const handleUpdate = async() => {
+    // eslint-disable-next-line no-restricted-globals
+    const updateTeam = confirm(`Would you like to update ${name}?`);
+    if (updateTeam){
+        updateTeamById(id, {name, city, state})
+        
+       history.push(`/teams/${id}`) 
+    }
+};
 
 //I want to go from display to edit
 //Switch State- like a light switch-when the user flips a switch form display to edit
-//edit ? <Edit> : <Display>
+//edit ? <Edit> : <Display> -idea by Zack and Michael
 //based on button true or false
 
 // const handleDelete = async ({ id, name }) => {
@@ -23,19 +47,13 @@ const [loading, setLoading] = useState(true);
 // }
 // };
 
-const handleUpdate = async({ id }) => {
-    const updateTeam = confirm(`Would you like to update ${name}?`);
-    if (updateTeam){
-        updateTeamById(id)
-        await teamLoad();
-    }
-};
+
 
 
 return (
     <>
     <fieldset>
-        <legend>Register Your Team!</legend>
+        <legend>Edit Your Team</legend>
         <form>
             <label htmlFor='name'>Name:</label>   
             <input 
@@ -51,7 +69,7 @@ return (
             id='city' 
             name='city' 
             type='text'
-            alue={city}
+            value={city}
             onChange={({ target }) => setCity(target.value)}  />
 
             <label htmlFor='state'>State:</label>   
@@ -63,7 +81,7 @@ return (
             onChange={({ target }) => setState(target.value)}  />
 
             {/* <button type="button" onClick={() => handleDelete({ id: team.id, name: team.name})}>Delete</button> */}
-            <button type="button" onClick={()=> handleUpdate({id: team.id, name: team.name})}>Update</button>
+            <button type="button" onClick={ handleUpdate}>Update</button>
         </form>
     </fieldset>
     </>
