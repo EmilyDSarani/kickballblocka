@@ -32,6 +32,7 @@ if(loading) return <h2>Kicker up!</h2>;
                             {player.position}-{player.name}
                         </li>
                     );
+                    
                 })}
             </ul>
         </div>

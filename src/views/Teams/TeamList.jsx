@@ -10,6 +10,8 @@ export default function TeamList() {
         getTeams().then((sponse)=>setTeams(sponse));
     },[]);
 
+
+
     return (
         <>
         <div>
