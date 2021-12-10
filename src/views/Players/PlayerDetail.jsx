@@ -21,7 +21,7 @@ export default function PlayerDetail({ match }) {
                 <p>
                     <Link to='/players'>Select a different Player</Link>
                     <br />
-                    <Link to={`/players/edit/${player.id}`} />
+                    <Link to={`/players/edit/${player.id}`}> Edit Player</Link>
                 </p>
                 <h2>{player.name}</h2>
             <h3>

@@ -38,7 +38,7 @@ const handleDelete = async() => {
     // eslint-disable-next-line no-restricted-globals
     const deleteTeam = confirm(`Would you like to delete ${name}?`);
     if (deleteTeam){
-        deleteTeamById(id, {name, city, state})
+        deleteTeamById(id)
         
        history.push(`/teams`) 
     }
@@ -74,9 +74,9 @@ return (
             value={state}
             onChange={({ target }) => setState(target.value)}  />
 
-            <button type="button" onClick={ handleDelete}>Delete</button>
+            <button type="button" onClick={handleUpdate}>Update</button>
 
-            <button type="button" onClick={ handleUpdate}>Update</button>
+            <button type="button" onClick={handleDelete}>Delete</button>
         </form>
     </fieldset>
     </>

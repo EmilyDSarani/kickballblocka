@@ -12,7 +12,6 @@ export default function PlayerAdd() {
 
     const history = useHistory();
 
-    console.log(teams);
     useEffect(()=>{
         getTeams().then((sponse)=>setTeams(sponse));
     }, []);
