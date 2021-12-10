@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router';
 import { deleteTeamById, updateTeamById, getTeamById } from '../../services/teams';
 
+
 export default function TeamEdit({ match }) {   
 const [name, setName] = useState('');
 const [city, setCity] = useState('');
@@ -23,6 +24,8 @@ useEffect(()=>{
     })
 }, [id]);
 
+
+
 //I do not have to pass anything into the async here, since I have access on a global scope
 const handleUpdate = async() => {
     // eslint-disable-next-line no-restricted-globals
@@ -34,13 +37,28 @@ const handleUpdate = async() => {
     }
 };
 //then, i just need to create a handleDelete since I am already doing the work for it all. The user will then just go back to the team list page. 
+
+//try-catch-finally
 const handleDelete = async() => {
+    
     // eslint-disable-next-line no-restricted-globals
     const deleteTeam = confirm(`Would you like to delete ${name}?`);
+//Michael helped me figure out what to do for this. So, essentially we are saying if user TRIES to delete the team, then delete the specific team and go back to team list. CATCH, if this error comes up, bring up an alert. ELSE return
+//i added in the fact that the user will just go back to the team detail page
     if (deleteTeam){
-        deleteTeamById(id)
-        
-       history.push(`/teams`) 
+        try {
+        await deleteTeamById(id)
+       return history.push(`/teams`); 
+        } catch(err){
+            if(err.code === '23503')
+            {
+                alert('You cannot delete a team tha has players on it')
+                return history.push(`/teams/${id}`)
+            }
+        }
+    } else { 
+         return;
+
     }
 };
 
