@@ -9,7 +9,7 @@ it('should render a player list', async () => {
     <PlayerList />
     </MemoryRouter>);
 
-    const player = await screen.findByText('Bud E. Guy', {exact: false})
+    const player = await screen.findByText('Miles A. Head', {exact: false})
     expect(player).toBeInTheDocument();
 })
 

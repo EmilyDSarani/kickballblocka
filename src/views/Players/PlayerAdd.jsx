@@ -50,13 +50,7 @@ export default function PlayerAdd() {
                 value={position}
                 onChange={({ target }) => setPosition(target.value)}  />
 
-                {/* <input
-                id="teamId"
-                name="teamId"
-                type='radio'
-                value={teamId.name}
-                onChange={({ target }) => setTeamId(target.value)}  /> */}
-
+                    {/* Katie helped me debug this map so that my teams would render in correctly in the drop down */}
                  <select onchange={({ target }) => setTeamId(target.value)} >
                 {teams.map((team)=>{
                     return(
