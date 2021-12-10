@@ -12,6 +12,8 @@ export default function PlayerList() {
         <>
         <div>
             <h1>Player Page</h1>
+            <p>Want to Join a Team?</p>
+            <Link to ='/players/newplayer'>Register Your Player </Link>
         </div>
         <ul>
             {players.map((player)=>{

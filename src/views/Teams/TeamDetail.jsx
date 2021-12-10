@@ -21,6 +21,7 @@ if(loading) return <h2>Kicker up!</h2>;
         <div>
             <p>
                 <Link to='/teams'>Select different Team</Link>
+                <br />
                 <Link to={`/teams/edit/${team.id}`}>Edit Team</Link>
             </p>
             <h2>{team.name}</h2>

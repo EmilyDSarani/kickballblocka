@@ -9,10 +9,11 @@ const[state,setState] = useState('');
 const history = useHistory();
 const { id } = match.params;
 // const [team, setTeam] = useState(null);
-const [loading, setLoading] = useState(true);
+// const [loading, setLoading] = useState(true);
 
 
-
+//this useEffect is getting the specific team by its id (which is coming from supabase and it is in global now)
+//the .then (like an async-await) is taking the sponse and setting the name, city, and state with it, then to render it the loading is false (which i might not actually need the loading in general but oh well for now)
 useEffect(()=>{
     getTeamById(id)
     .then((sponse)=> { 
@@ -20,10 +21,9 @@ useEffect(()=>{
         setCity(sponse.city)
         setState(sponse.state)
     })
-    .finally(()=> setLoading(false))
 }, [id]);
 
-//I do not have to call it into here, since I have access on a global scope
+//I do not have to pass anything into the async here, since I have access on a global scope
 const handleUpdate = async() => {
     // eslint-disable-next-line no-restricted-globals
     const updateTeam = confirm(`Would you like to update ${name}?`);
@@ -33,22 +33,16 @@ const handleUpdate = async() => {
        history.push(`/teams/${id}`) 
     }
 };
-
-//I want to go from display to edit
-//Switch State- like a light switch-when the user flips a switch form display to edit
-//edit ? <Edit> : <Display> -idea by Zack and Michael
-//based on button true or false
-
-// const handleDelete = async ({ id, name }) => {
-//     const deleteTeam = confirm(`You are attempting to delete ${name}, did you mean to do this?`);
-//     if(deleteTeam) { 
-//         await deleteTeamById(id)
-//         await teamLoad();
-// }
-// };
-
-
-
+//then, i just need to create a handleDelete since I am already doing the work for it all. The user will then just go back to the team list page. 
+const handleDelete = async() => {
+    // eslint-disable-next-line no-restricted-globals
+    const deleteTeam = confirm(`Would you like to delete ${name}?`);
+    if (deleteTeam){
+        deleteTeamById(id, {name, city, state})
+        
+       history.push(`/teams`) 
+    }
+};
 
 return (
     <>
@@ -80,7 +74,8 @@ return (
             value={state}
             onChange={({ target }) => setState(target.value)}  />
 
-            {/* <button type="button" onClick={() => handleDelete({ id: team.id, name: team.name})}>Delete</button> */}
+            <button type="button" onClick={ handleDelete}>Delete</button>
+
             <button type="button" onClick={ handleUpdate}>Update</button>
         </form>
     </fieldset>
