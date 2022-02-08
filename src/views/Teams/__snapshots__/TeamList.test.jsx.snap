@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render a team list 1`] = `
+<div>
+  <div>
+    <h1>
+      Team Page
+    </h1>
+  </div>
+  <ul />
+</div>
+`;
